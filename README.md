@@ -58,7 +58,8 @@ ERR[16:0] ───────────────────────�
 edac-alu/
 ├── docs/            # Tài liệu đặc tả (Spec), kế hoạch thực hiện, biên bản họp
 ├── model/           # Golden model viết bằng Python (tính toán vector & thống kê lỗi)
-├── rtl/             # Mã nguồn Verilog tham chiếu và Testbench kiểm chứng logic
+├── virtuoso/        # Thư viện Cadence Virtuoso (EDAC_ALU: schematic, symbol, layout, PEX)
+├── gds/             # File layout xuất GDSII
 ├── vectors/         # Dữ liệu kích thích (Stimulus) và kết quả kỳ vọng (Expected outputs)
 ├── scripts/         # Script sinh stimulus cho Spectre, OCEAN script tự động hóa đo đạc
 ├── results/         # Dữ liệu thô (.csv), ảnh chụp dạng sóng (Waveform) và ảnh Layout
@@ -79,9 +80,10 @@ Ngoài việc đảm bảo mạch hoạt động đúng chức năng và sạch 
 
 ## 👥 Nhóm thực hiện
 
-Dự án được thực hiện bởi nhóm 5 thành viên trong khuôn khổ môn học **Thiết kế vi mạch (VLSI)**:
-* **TV1 (Nhóm trưởng):** Kiến trúc hệ thống, Golden Model, Tích hợp & Layout Top-level.
-* **TV2:** Thiết kế và đặc tính hóa thư viện Standard Cell, nghiên cứu tối ưu cổng XOR.
-* **TV3:** Thiết kế Schematic và Layout khối ALU 8-bit.
-* **TV4:** Thiết kế Schematic và Layout khối Hamming SEC-DED $(13,8)$ Encoder/Decoder.
-* **TV5:** Thiết kế khối CRC-4, Error Injector, tổng hợp số liệu và tài liệu báo cáo.
+| Thành viên | Vai trò chính | Phụ trách kỹ thuật (Schematic đến LVS sạch) |
+| :--- | :--- | :--- |
+| **TV1 (Nhóm trưởng)** | Kiến trúc, tích hợp & kiểm chứng | Spec, Python golden model, bộ vector, MUX chế độ, top-level schematic & layout |
+| **TV2** | Thư viện cell chuẩn | Thiết kế & đặc tính hóa `INV`, `NAND`, `NOR`, `XOR/XNOR` (3 kiểu), `MUX2`, `BUF`, `DFF`; quy ước layout |
+| **TV3** | Khối ALU 8-bit | Full adder, bộ cộng/trừ 8-bit, khối logic, MUX 8:1, mạch cờ, layout ALU |
+| **TV4** | Khối Hamming SEC-DED | Hamming encoder, cây syndrome, giải mã vị trí, mạch sửa lỗi, layout Hamming |
+| **TV5** | Khối CRC-4, bơm lỗi & tài liệu | Mạch CRC-4 phát/kiểm, error injector, tổng hợp số liệu, báo cáo, slide & video demo |
